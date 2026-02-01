@@ -75,8 +75,22 @@
         
         /* Рӯйхати кормандон (барои кормандон) */
         .employee-list-simple { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 15px; }
-        .employee-card-simple { background-color: white; border-radius: 10px; padding: 20px; box-shadow: 0 3px 10px rgba(0,0,0,0.05); transition: transform 0.3s, box-shadow 0.3s; cursor: pointer; text-align: center; }
-        .employee-card-simple:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.08); }
+        .employee-card-simple { 
+            background-color: white; 
+            border-radius: 10px; 
+            padding: 20px; 
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05); 
+            transition: transform 0.3s, box-shadow 0.3s; 
+            cursor: pointer; 
+            text-align: center;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+        }
+        .employee-card-simple.selected {
+            background-color: #f0f7ff;
+            border: 2px solid #4a6cf7;
+        }
         .employee-card-simple h3 { font-size: 18px; font-weight: 600; color: #333; margin-bottom: 5px; }
         .employee-card-simple p { color: #666; font-size: 14px; }
         
@@ -102,7 +116,16 @@
         .status-selector { margin-bottom: 25px; }
         .status-selector h3 { margin-bottom: 15px; font-weight: 600; color: #333; }
         .status-options { display: flex; gap: 20px; }
-        .status-option { display: flex; flex-direction: column; align-items: center; cursor: pointer; transition: transform 0.3s; }
+        .status-option { 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            cursor: pointer; 
+            transition: transform 0.3s;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+        }
         .status-option:hover { transform: scale(1.05); }
         .status-option.selected .status-icon { transform: scale(1.1); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
         .status-icon { width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 32px; margin-bottom: 10px; transition: all 0.3s; }
@@ -341,23 +364,44 @@
             }
             
             /* Нав: Барои тугмаҳо дар мобайл */
-            .btn {
+            .btn, .icon-btn, .employee-actions button, .password-toggle, .close-btn {
                 min-height: 44px; /* Барои тап кардан осонтар */
+                min-width: 44px;
             }
             
-            /* Нав: Барои карточкаҳои кормандон дар саҳифаи кормандон */
+            /* Нав: Барои карточкаҳои кормандон дар мобайл */
             .employee-card-simple {
-                padding: 15px;
+                min-height: 100px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
+            
+            /* Нав: Барои пешгирии тапҳои ногаҳонӣ */
+            .employee-card-simple {
+                touch-action: manipulation;
             }
             
             .employee-card-simple h3 {
                 font-size: 16px;
+                margin-bottom: 8px;
+            }
+            
+            .employee-card-simple p {
+                font-size: 12px;
+                color: #888;
             }
             
             /* Нав: Барои инфо-бокс дар мобайл */
             .info-box {
                 padding: 12px;
                 font-size: 14px;
+            }
+            
+            /* Нав: Барои барқароркунии систими ҷустуҷӯ дар мобайл */
+            .employee-search-box {
+                margin-bottom: 20px;
+                width: 100%;
             }
         }
         
@@ -447,6 +491,15 @@
             .mobile-btn-text {
                 display: none;
             }
+            
+            /* Нав: Барои ҷустуҷӯ дар мобайл */
+            .employee-search-box {
+                margin-top: 10px;
+            }
+            
+            .employee-search-box input {
+                font-size: 14px;
+            }
         }
         
         /* Нав: Барои планшетҳо (768px то 1024px) */
@@ -477,6 +530,12 @@
             .header-right .btn {
                 font-size: 14px;
                 padding: 10px 15px;
+            }
+            
+            /* Нав: Барои ҷустуҷӯ дар планшет */
+            .employee-search-box {
+                width: 100%;
+                margin-bottom: 20px;
             }
         }
         
@@ -602,6 +661,30 @@
             color: #666;
         }
         
+        /* Нав: Стилҳои систими ҷустуҷӯ барои кормандон */
+        .employee-search-box {
+            display: flex;
+            align-items: center;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 12px 15px;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+        
+        .employee-search-box i {
+            color: #888;
+            margin-right: 10px;
+        }
+        
+        .employee-search-box input {
+            border: none;
+            outline: none;
+            width: 100%;
+            font-size: 16px;
+        }
+        
         /* Нав: Барои такмили адаптатсия дар компютерҳо */
         @media (min-width: 1200px) {
             .content {
@@ -628,6 +711,13 @@
                 min-height: 44px;
                 min-width: 44px;
             }
+            
+            /* Нав: Барои пешгирии тапҳои ногаҳонӣ дар кормандон */
+            .employee-card-simple {
+                -webkit-tap-highlight-color: transparent;
+                touch-action: manipulation;
+                user-select: none;
+            }
         }
         
         /* Нав: Барои режими landscape дар мобайл */
@@ -646,6 +736,13 @@
             
             .history-list {
                 max-height: 200px;
+            }
+            
+            /* Нав: Барои саҳифаи кормандон дар landscape */
+            .employee-list-simple {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                max-height: 70vh;
+                overflow-y: auto;
             }
         }
     </style>
@@ -936,6 +1033,12 @@
                     <p><i class="fas fa-info-circle"></i> Ин саҳифа барои кормандон аст. Лутфан номи худро интихоб кунед, то ҳозирбуди худро сабт кунед.</p>
                 </div>
                 
+                <!-- Нав: Ҷустуҷӯ барои кормандон -->
+                <div class="employee-search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="employee-search-input" placeholder="Ҷустуҷӯи корманд...">
+                </div>
+                
                 <div class="employee-list-simple" id="employee-list-simple">
                     <!-- Кормандон дар ин ҷо бо JavaScript пур карда мешаванд -->
                 </div>
@@ -1175,6 +1278,11 @@
             currentEmployee: null,
             selectedEmployeeForLogin: null,
             currentDate: null, // Санаи имрӯз, ки корманд наметавонад тағир диҳад
+            isMobile: false,
+            lastTapTime: 0, // Барои ҳифзи тапҳои ногаҳонӣ
+            tapDelay: 300, // Фосила барои тапҳои ногаҳонӣ (миллисония)
+            lastTappedEmployeeId: null, // Барои double tap дар мобил
+            doubleTapWindow: 450, // Фосила (мс) барои ду бор пахш кардан // Фосила барои тапҳои ногаҳонӣ (миллисония)
             
             init: function() {
                 console.log('Инициализацияи барнома оғоз шуд');
@@ -1208,6 +1316,21 @@
                         this.style.opacity = '1';
                     }, { passive: true });
                 });
+                
+                // Барои карточкаҳои кормандон
+                document.addEventListener('touchstart', (e) => {
+                    if (e.target.closest('.employee-card-simple')) {
+                        const card = e.target.closest('.employee-card-simple');
+                        card.style.opacity = '0.8';
+                    }
+                }, { passive: true });
+                
+                document.addEventListener('touchend', (e) => {
+                    if (e.target.closest('.employee-card-simple')) {
+                        const card = e.target.closest('.employee-card-simple');
+                        card.style.opacity = '1';
+                    }
+                }, { passive: true });
             },
             
             preventZoomOnInput: function() {
@@ -1464,6 +1587,12 @@
                     closeEmployeePageBtn.addEventListener('click', () => this.showPage('start'));
                 }
                 
+                // Нав: Ҷустуҷӯ дар саҳифаи кормандон
+                const employeeSearchInput = document.getElementById('employee-search-input');
+                if (employeeSearchInput) {
+                    employeeSearchInput.addEventListener('input', (e) => this.filterEmployees(e.target.value));
+                }
+                
                 // Ҳозирбуд
                 const backToEmployeePageBtn = document.getElementById('back-to-employee-page-btn');
                 if (backToEmployeePageBtn) {
@@ -1637,6 +1766,14 @@
                     document.querySelectorAll('.modal.active').forEach(modal => {
                         modal.classList.remove('active');
                     });
+                    
+                    // Тоза кардани ҷустуҷӯ дар саҳифаи кормандон
+                    if (pageName === 'employee') {
+                        const searchInput = document.getElementById('employee-search-input');
+                        if (searchInput) {
+                            searchInput.value = '';
+                        }
+                    }
                 } else {
                     console.error('Саҳифа ёфт нашуд:', pageName);
                 }
@@ -1832,7 +1969,7 @@
                 `).join('');
             },
             
-            loadEmployeesForEmployeePage: function() {
+            loadEmployeesForEmployeePage: function(searchTerm = '') {
                 const employees = this.getEmployees();
                 const employeeList = document.getElementById('employee-list-simple');
                 
@@ -1849,8 +1986,17 @@
                     return;
                 }
                 
+                let filteredEmployees = employees;
+                if (searchTerm) {
+                    const term = searchTerm.toLowerCase();
+                    filteredEmployees = employees.filter(emp => 
+                        emp.firstName.toLowerCase().includes(term) || 
+                        emp.lastName.toLowerCase().includes(term) ||
+                        `${emp.firstName} ${emp.lastName}`.toLowerCase().includes(term)
+                    );
+                }
                 
-                const sortedEmployees = this.sortEmployeesByName(employees);
+                const sortedEmployees = this.sortEmployeesByName(filteredEmployees);
                 
                 employeeList.innerHTML = sortedEmployees.map(employee => `
                     <div class="employee-card-simple" data-id="${employee.id}">
@@ -1862,20 +2008,71 @@
                     </div>
                 `).join('');
                 
-                // Илова кардани дастур барои клик кардани корманд
+                // Илова кардани дастурҳои нав барои пешгирии тапҳои ногаҳонӣ
+                this.setupEmployeeCardClickHandlers();
+            },
+            
+            setupEmployeeCardClickHandlers: function() {
                 document.querySelectorAll('.employee-card-simple').forEach(card => {
-                    card.addEventListener('click', (e) => {
-                        const employeeId = parseInt(card.getAttribute('data-id'));
-                        this.openEmployeeLoginModal(employeeId);
-                    });
+                    // Хомӯш кардани ҳамаи дастурҳои қадим
+                    card.removeEventListener('click', this.handleEmployeeCardClick);
+                    card.removeEventListener('touchstart', this.handleEmployeeCardTouch);
                     
-                    // Барои мобил
-                    card.addEventListener('touchstart', (e) => {
-                        e.preventDefault();
-                        const employeeId = parseInt(card.getAttribute('data-id'));
-                        this.openEmployeeLoginModal(employeeId);
-                    }, { passive: false });
+                    // Дастурҳои нав
+                    card.addEventListener('click', this.handleEmployeeCardClick.bind(this));
+                    card.addEventListener('touchstart', this.handleEmployeeCardTouch.bind(this), { passive: false });
                 });
+            },
+            
+            handleEmployeeCardClick: function(e) {
+    // Дар мобил танҳо touchstart-ро истифода мебарем, то "ghost click" нашавад
+    if (this.isMobile) return;
+
+    const employeeId = parseInt(e.currentTarget.getAttribute('data-id'));
+    this.openEmployeeLoginModal(employeeId);
+},
+
+// Нав: Барои мобил — кушодан фақат бо ду бор пахш кардан (double tap)
+handleEmployeeCardTouch: function(e) {
+    e.preventDefault(); // Пешгирии клик-и дуюм (ghost click)
+
+    const employeeId = parseInt(e.currentTarget.getAttribute('data-id'));
+    const currentTime = new Date().getTime();
+    const tapLength = currentTime - this.lastTapTime;
+
+    // Агар ҳамин кормандро дар мӯҳлати муайян дубор пахш карданд -> кушодан
+    if (this.lastTappedEmployeeId === employeeId && tapLength <= this.doubleTapWindow && tapLength > 0) {
+        this.lastTapTime = 0;
+        this.lastTappedEmployeeId = null;
+        this.clearEmployeeSelection();
+        this.openEmployeeLoginModal(employeeId);
+        return;
+    }
+
+    // Пахши аввал: интихоб + паём
+    this.lastTapTime = currentTime;
+    this.lastTappedEmployeeId = employeeId;
+    this.markEmployeeSelected(employeeId);
+    this.showToast('Барои кушодан дубор пахш кунед', 'warning');
+},
+
+// Нав: интихоби визуалӣ дар саҳифаи кормандон
+markEmployeeSelected: function(employeeId) {
+    document.querySelectorAll('.employee-card-simple').forEach(card => {
+        card.classList.remove('selected');
+    });
+    const card = document.querySelector(`.employee-card-simple[data-id="${employeeId}"]`);
+    if (card) card.classList.add('selected');
+},
+
+clearEmployeeSelection: function() {
+    document.querySelectorAll('.employee-card-simple').forEach(card => {
+        card.classList.remove('selected');
+    });
+},
+            
+            filterEmployees: function(searchTerm) {
+                this.loadEmployeesForEmployeePage(searchTerm);
             },
             
             getEmployeeAttendanceCount: function(employeeId) {
